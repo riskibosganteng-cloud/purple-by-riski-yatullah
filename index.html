@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purple Client</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Segoe UI,Arial,sans-serif;
+    color:white;
+    background:#070014;
+}
+
+.app{
+    min-height:100vh;
+    display:flex;
+    background:
+        radial-gradient(circle at 65% 10%,#5d12c7 0%,transparent 30%),
+        radial-gradient(circle at 20% 80%,#260052 0%,transparent 35%),
+        linear-gradient(135deg,#120026,#05000d);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:185px;
+    min-height:100vh;
+    padding:25px 15px;
+    border-right:1px solid #351064;
+    background:rgba(8,0,25,.8);
+}
+
+.logo{
+    color:#842cff;
+    font-size:26px;
+    font-weight:900;
+    letter-spacing:-1px;
+}
+
+.logo span{
+    color:#c7b3df;
+    display:block;
+    font-size:11px;
+    letter-spacing:4px;
+    margin-left:38px;
+    margin-top:-3px;
+}
+
+.nav{
+    margin-top:35px;
+}
+
+.nav button{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#bca5dc;
+    padding:14px;
+    border-radius:12px;
+    text-align:left;
+    font-size:16px;
+    margin:5px 0;
+    cursor:pointer;
+}
+
+.nav button:hover,
+.nav button.active{
+    background:linear-gradient(90deg,#6418e8,#8125ff);
+    color:white;
+    box-shadow:0 0 20px #721dff55;
+}
+
+/* MAIN */
+
+.main{
+    flex:1;
+    padding:25px;
+    max-width:1150px;
+    width:100%;
+    margin:auto;
+}
+
+.top{
+    display:flex;
+    justify-content:flex-end;
+    margin-bottom:15px;
+}
+
+.account{
+    border:1px solid #41127d;
+    background:#12042d;
+    border-radius:14px;
+    padding:10px 18px;
+    min-width:165px;
+}
+
+/* CONTENT */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+
+.hero{
+    padding:10px;
+}
+
+.eyebrow{
+    color:#a878e9;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.hero h1{
+    font-size:50px;
+    margin:4px 0;
+    background:linear-gradient(90deg,#fff,#8b2fff);
+    color:transparent;
+    background-clip:text;
+    -webkit-background-clip:text;
+}
+
+.hero p{
+    color:#c4b0dc;
+    line-height:1.5;
+}
+
+.row{
+    display:flex;
+    gap:14px;
+    margin-top:20px;
+}
+
+.select{
+    padding:15px 20px;
+    border:1px solid #4c188b;
+    background:#13042d;
+    border-radius:13px;
+}
+
+.play,
+.add{
+    border:0;
+    border-radius:13px;
+    padding:15px 22px;
+    color:white;
+    background:linear-gradient(90deg,#6817eb,#8628ff);
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.play{
+    min-width:180px;
+    font-size:18px;
+}
+
+/* INFO CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-top:20px;
+}
+
+.card{
+    padding:18px;
+    text-align:center;
+    border:1px solid #38116e;
+    background:#0d0225dd;
+    border-radius:16px;
+}
+
+.icon{
+    font-size:28px;
+    color:#a945ff;
+}
+
+.card h3{
+    font-size:13px;
+    margin:8px 0;
+}
+
+.muted{
+    color:#ae9ac7;
+    font-size:13px;
+}
+
+/* SKIN VIEWER */
+
+.viewer{
+    min-height:425px;
+    padding:20px;
+    border:1px solid #54169b;
+    background:#0b0123dd;
+    border-radius:18px;
+    box-shadow:0 0 25px #4d0a8840;
+}
+
+.skinbox{
+    height:290px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:45px;
+}
+
+/* SIMPLE MINECRAFT SKIN */
+
+.skin{
+    position:relative;
+    width:100px;
+    height:215px;
+}
+
+.head{
+    width:64px;
+    height:64px;
+    margin:auto;
+    background:#b87951;
+    border:2px solid #693a28;
+}
+
+.hair{
+    height:15px;
+    background:#4a2719;
+}
+
+.body{
+    width:78px;
+    height:76px;
+    margin:auto;
+    background:#18a9a9;
+}
+
+.arm{
+    position:absolute;
+    top:79px;
+    width:25px;
+    height:73px;
+    background:#b87951;
+}
+
+.arm.left{
+    left:-5px;
+}
+
+.arm.right{
+    right:-5px;
+}
+
+.leg{
+    position:absolute;
+    bottom:0;
+    width:37px;
+    height:75px;
+    background:#30208c;
+}
+
+.leg.left{
+    left:10px;
+}
+
+.leg.right{
+    right:10px;
+}
+
+/* BACK SKIN */
+
+.back .head{
+    background:#4c2b19;
+}
+
+.back .body{
+    background:#159b9e;
+}
+
+/* FRONT BACK BUTTON */
+
+.viewer-buttons{
+    display:flex;
+    padding:4px;
+    border:1px solid #4a168a;
+    background:#160735;
+    border-radius:30px;
+}
+
+.viewer-buttons button{
+    flex:1;
+    border:0;
+    background:transparent;
+    color:#bd9ae5;
+    padding:11px;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.viewer-buttons button.active{
+    background:#751df2;
+    color:white;
+    box-shadow:0 0 15px #721bff66;
+}
+
+/* BOTTOM */
+
+.bottom{
+    grid-column:1/-1;
+    display:grid;
+    grid-template-columns:1.5fr .9fr;
+    gap:20px;
+}
+
+.panel{
+    padding:18px;
+    border:1px solid #38116e;
+    background:#0d0225dd;
+    border-radius:16px;
+}
+
+.versions{
+    display:flex;
+    gap:12px;
+    margin-top:15px;
+}
+
+.version{
+    flex:1;
+    padding:14px;
+    border:1px solid #32116a;
+    border-radius:12px;
+}
+
+.version button{
+    width:100%;
+    margin-top:10px;
+    padding:9px;
+    border:0;
+    border-radius:9px;
+    background:#6617e9;
+    color:white;
+    cursor:pointer;
+}
+
+.setting{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+}
+
+.toggle{
+    width:40px;
+    height:22px;
+    border-radius:20px;
+    background:#777;
+}
+
+.toggle.on{
+    background:#7b1dff;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+
+    .sidebar{
+        width:90px;
+    }
+
+    .logo,
+    .logo span{
+        display:none;
+    }
+
+    .grid,
+    .bottom{
+        grid-template-columns:1fr;
+    }
+
+    .versions{
+        flex-direction:column;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        PURPLE
+        <span>CLIENT</span>
+    </div>
+
+    <div class="nav">
+        <button class="active">⌂ &nbsp; Home</button>
+        <button>◇ &nbsp; Versions</button>
+        <button>⚙ &nbsp; Settings</button>
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <!-- ACCOUNT -->
+
+    <div class="top">
+
+        <div class="account">
+            👾 &nbsp; Player<br>
+            <small style="color:#9d8ab8;">
+                🟢 Online
+            </small>
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <!-- WELCOME -->
+
+        <section class="hero">
+
+            <div class="eyebrow">
+                WELCOME TO
+            </div>
+
+            <h1>
+                Purple Client
+            </h1>
+
+            <p>
+                Main Minecraft dengan lebih mudah,<br>
+                cepat, dan tentunya lebih keren!
+            </p>
+
+
+            <div class="row">
+
+                <div class="select">
+                    🧱 Minecraft 1.21.1　⌄
+                </div>
+
+                <button class="play">
+                    ▶ PLAY
+                </button>
+
+            </div>
+
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <div class="icon">ϟ</div>
+
+                    <h3>
+                        PERFORMANCE
+                    </h3>
+
+                    <span class="muted">
+                        Lebih ringan,<br>
+                        lebih cepat
+                    </span>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">◆</div>
+
+                    <h3>
+                        CLIENT VERSION
+                    </h3>
+
+                    <span class="muted">
+                        Alpha 0.2
+                    </span>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">●</div>
+
+                    <h3>
+                        STATUS
+                    </h3>
+
+                    <span class="muted">
+                        🟢 Ready
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SKIN VIEWER -->
+
+        <section class="viewer">
+
+            <button
+                class="add"
+                onclick="document.getElementById('skinInput').click()">
+
+                ＋ ADD SKIN
+
+            </button>
+
+            <input
+                id="skinInput"
+                type="file"
+                accept="image/png"
+                hidden
+            >
+
+
+            <div class="skinbox">
+
+                <!-- FRONT -->
+
+                <div
+                    class="skin"
+                    id="frontSkin">
+
+                    <div class="head">
+
+                        <div class="hair"></div>
+
+                    </div>
+
+                    <div class="body"></div>
+
+                    <div class="arm left"></div>
+                    <div class="arm right"></div>
+
+                    <div class="leg left"></div>
+                    <div class="leg right"></div>
+
+                </div>
+
+
+                <!-- BACK -->
+
+                <div
+                    class="skin back"
+                    id="backSkin">
+
+                    <div class="head"></div>
+
+                    <div class="body"></div>
+
+                    <div class="arm left"></div>
+                    <div class="arm right"></div>
+
+                    <div class="leg left"></div>
+                    <div class="leg right"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FRONT / BACK -->
+
+            <div class="viewer-buttons">
+
+                <button
+                    id="frontBtn"
+                    class="active">
+
+                    ♙ FRONT
+
+                </button>
+
+                <button
+                    id="backBtn">
+
+                    ♙ BACK
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- MINECRAFT VERSIONS -->
+
+        <section class="panel bottom">
+
+            <div>
+
+                <b>
+                    ◈ &nbsp; MINECRAFT VERSIONS
+                </b>
+
+                <div class="muted">
+                    Pilih versi yang ingin kamu mainkan.
+                </div>
+
+
+                <div class="versions">
+
+                    <div class="version">
+
+                        🧱 <b>1.21.1</b>
+
+                        <br>
+
+                        🟢 Ready
+
+                        <button>
+                            SELECT
+                        </button>
+
+                    </div>
+
+
+                    <div class="version">
+
+                        🧱 <b>1.21</b>
+
+                        <br>
+
+                        🟢 Ready
+
+                        <button>
+                            SELECT
+                        </button>
+
+                    </div>
+
+
+                    <div class="version">
+
+                        🧱 <b>1.20.1</b>
+
+                        <br>
+
+                        🟢 Ready
+
+                        <button>
+                            SELECT
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SETTINGS -->
+
+            <div>
+
+                <b>
+                    ⚙ QUICK SETTINGS
+                </b>
+
+                <div class="setting">
+                    Fullscreen
+                    <span class="toggle"></span>
+                </div>
+
+                <div class="setting">
+                    Show FPS
+                    <span class="toggle"></span>
+                </div>
+
+                <div class="setting">
+                    Auto Update
+                    <span class="toggle on"></span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+</div>
+
+
+<script>
+
+/* FRONT / BACK */
+
+const frontSkin =
+    document.getElementById("frontSkin");
+
+const backSkin =
+    document.getElementById("backSkin");
+
+const frontBtn =
+    document.getElementById("frontBtn");
+
+const backBtn =
+    document.getElementById("backBtn");
+
+
+frontBtn.onclick = function(){
+
+    frontSkin.style.display = "block";
+    backSkin.style.display = "none";
+
+    frontBtn.classList.add("active");
+    backBtn.classList.remove("active");
+
+};
+
+
+backBtn.onclick = function(){
+
+    frontSkin.style.display = "none";
+    backSkin.style.display = "block";
+
+    backBtn.classList.add("active");
+    frontBtn.classList.remove("active");
+
+};
+
+
+/* DEFAULT FRONT */
+
+frontBtn.click();
+
+
+/* ADD SKIN */
+
+const skinInput =
+    document.getElementById("skinInput");
+
+skinInput.addEventListener("change",function(){
+
+    if(this.files.length > 0){
+
+        document.querySelector(".add").innerHTML =
+            "✓ SKIN ADDED";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
